@@ -1,12 +1,13 @@
 # swing_desk
 Multi-agent AI financial advisor for US stock analysis built with Streamlit, Agno, Groq, DuckDuckGo, and yfinance
 
-# Swing Desk — US Equity Analyst 
+# Swing Desk — US Equity Analyst
+
 ## [Disclaimer: Just for learning purpose and not for real trade]
 
 A small Streamlit app that helps get a quick second opinion before a swing trade on US-listed stocks (NYSE/NASDAQ). Give it two tickers, it pulls live price data and runs a couple of AI agents to research and compare them.
 
-Built this mostly for showcase purpose  — comparing stocks before one enters a trade usually meant switching between five browser tabs. This puts the important bits in one place.
+Built this mostly for showcase purpose — comparing stocks before one enters a trade usually meant switching between five browser tabs. This puts the important bits in one place.
 
 ## What it does
 
@@ -25,13 +26,26 @@ It is not a stock tip generator. Treat the output as a starting point for your o
 - **yfinance** for stock and index prices
 - **DuckDuckGo search** for the web-research side
 
+## Project structure
+
+```
+swing_desk/
+├── financial_advisor_app.py   # the whole app — UI, agents, market data calls
+├── requirements.txt           # Python dependencies
+├── .gitignore                 # keeps .env and other local files out of git
+├── LICENSE                    # MIT
+└── README.md
+```
+
+Everything lives in one file (`financial_advisor_app.py`) on purpose — it's small enough that splitting it into modules would add more overhead than it saves.
+
 ## Running it locally
 
 1. Clone the repo and install requirements:
 
    ```bash
-   git clone https://github.com/<your-username>/swing-desk.git
-   cd swing-desk
+   git clone https://github.com/learnermp09/swing_desk.git
+   cd swing_desk
    pip install -r requirements.txt
    ```
 
@@ -62,11 +76,10 @@ That's it — no other config needed.
 
 ## A few honest limitations
 
-- Price data can lag the exchange by a few minutes, it's not tick-by-tick.
+- Price data can lag the exchange by a few minutes
 - The web-research agent uses DuckDuckGo, which occasionally returns nothing useful for obscure queries — it'll just work with less context if that happens.
 - The market clock in the ticker is a rough ET estimate and doesn't adjust for daylight saving — good enough for a glance, not for anything time-critical.
 - Small-cap and less-liquid stocks sometimes have patchy data on yfinance. Works best on well-covered large and mid-cap names.
-- This is a personal project, not a polished product. Expect rough edges.
 
 ## License
 
