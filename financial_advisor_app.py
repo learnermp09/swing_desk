@@ -368,13 +368,14 @@ def get_index_snapshot():
     out = []
     for label, sym in indices.items():
         try:
-            fi = yf.Ticker(sym).fast_info
-            price, prev = fi.get("last_price"), fi.get("previous_close")
-            if price is None or prev is None:
-                continue
-            chg = price - prev
-            pct = (chg / prev) * 100 if prev else 0.0
-            out.append((label, price, chg, pct))
+            ticker = yf.Ticker(sym)
+            hist = ticker.history(period="1d")
+            if not hist.empty:
+                price = hist['Close'].iloc[-1]
+                prev = hist['Open'].iloc[0] if len(hist) > 0 else price
+                chg = price - prev
+                pct = (chg / prev) * 100 if prev else 0.0
+                out.append((label, price, chg, pct))
         except Exception:
             continue
     return out
@@ -383,13 +384,15 @@ def get_index_snapshot():
 @st.cache_data(ttl=60)
 def quick_quote(ticker: str):
     try:
-        fi = yf.Ticker(clean_ticker(ticker)).fast_info
-        price, prev = fi.get("last_price"), fi.get("previous_close")
-        if price is None or prev is None:
-            return None
-        chg = price - prev
-        pct = (chg / prev) * 100 if prev else 0.0
-        return price, chg, pct
+        ticker_obj = yf.Ticker(clean_ticker(ticker))
+        hist = ticker_obj.history(period="1d")
+        if not hist.empty:
+            price = hist['Close'].iloc[-1]
+            prev = hist['Open'].iloc[0] if len(hist) > 0 else price
+            chg = price - prev
+            pct = (chg / prev) * 100 if prev else 0.0
+            return price, chg, pct
+        return None
     except Exception:
         return None
 
@@ -398,12 +401,13 @@ def render_ticker():
     snapshot = get_index_snapshot()
     now_et = dt.datetime.utcnow() - dt.timedelta(hours=4)  # approx. US Eastern (ET, no DST handling)
     parts = []
-    for label, price, chg, pct in snapshot:
-        cls = "up" if chg >= 0 else "down"
-        arrow = "▲" if chg >= 0 else "▼"
-        parts.append(f'<span class="{cls}">{label} {price:,.2f} {arrow} {pct:+.2f}%</span>')
-    if not parts:
-        parts.append("<span>Market data unavailable</span>")
+    if snapshot:
+        for label, price, chg, pct in snapshot:
+            cls = "up" if chg >= 0 else "down"
+            arrow = "▲" if chg >= 0 else "▼"
+            parts.append(f'<span class="{cls}">{label} {price:,.2f} {arrow} {pct:+.2f}%</span>')
+    else:
+        parts.append('<span>⏳ Market data loading...</span>')
     parts.append(f'<span>ET {now_et.strftime("%H:%M:%S")}</span>')
     ticker_html = '<span class="sep">•</span>'.join(parts)
     st.markdown(f'<div class="ticker-wrap"><div class="ticker">{ticker_html}</div></div>', unsafe_allow_html=True)
@@ -616,7 +620,6 @@ st.markdown(
         • It does <strong>NOT</strong> recommend buying or selling securities.<br>
         • Market data may be delayed or incomplete.<br>
         • Always perform your own research and consult a qualified financial advisor before making investment decisions.<br><br>
-        <em style="color: #6B6B6B;">Developed @DecodixAI by Mrityunjay Pathak</em>
     </div>
     """,
     unsafe_allow_html=True
