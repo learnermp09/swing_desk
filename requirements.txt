@@ -1,7 +1,6 @@
 agno
 fastapi
 ddgs
-duckduckgo
 yfinance
 groq
 ipykernel
