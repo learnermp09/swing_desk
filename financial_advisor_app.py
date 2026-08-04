@@ -75,6 +75,18 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; background: var(-
 .stApp { background: var(--bg); color: var(--text); }
 #MainMenu, footer, header { visibility: hidden; }
 
+/* Reduce blank space at the top */
+.block-container {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+}
+
+/* Reduce spacing between elements */
+.element-container {
+    margin-top: 0.1rem !important;
+    margin-bottom: 0.1rem !important;
+}
+
 /* ---- Header with logo ---- */
 .header-container {
     display: flex;
@@ -595,17 +607,17 @@ if run and query.strip():
                 st.error(f"An error occurred: {error_msg}")
 
 st.write("")
-st.warning(
+st.markdown(
     """
-    **Educational Use Only**
-
-    This application is intended exclusively for learning US stock market
-    analysis and swing-trading concepts.
-
-    • It is NOT financial or investment advice.
-    • It does NOT recommend buying or selling securities.
-    • Market data may be delayed or incomplete.
-    • Always perform your own research and consult a qualified financial advisor
-      before making investment decisions.
-    """
+    <div style="background: #EBEBEB; border: 1px solid #D0D0D0; border-radius: 8px; padding: 0.8rem 1.2rem; color: #2C2C2C; margin-top: 0.5rem;">
+        <strong style="color: #2C2C2C;">⚠️ Educational Use Only</strong><br>
+        This application is intended exclusively for learning US stock market analysis and swing-trading concepts.<br><br>
+        • It is <strong>NOT</strong> financial or investment advice.<br>
+        • It does <strong>NOT</strong> recommend buying or selling securities.<br>
+        • Market data may be delayed or incomplete.<br>
+        • Always perform your own research and consult a qualified financial advisor before making investment decisions.<br><br>
+        <em style="color: #6B6B6B;">Developed @DecodixAI by Mrityunjay Pathak</em>
+    </div>
+    """,
+    unsafe_allow_html=True
 )
