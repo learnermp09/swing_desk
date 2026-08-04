@@ -72,7 +72,9 @@ Everything lives in one file (`financial_advisor_app.py`) on purpose — it's sm
    GROQ_API_KEY = "your_key_here"
    ```
 
-That's it — no other config needed.
+## Frontend interface
+<img width="1752" height="818" alt="image" src="https://github.com/user-attachments/assets/ffd1eacb-ad08-4c67-9c4e-6203ce7e82f9" />
+
 
 ## A few honest limitations
 
