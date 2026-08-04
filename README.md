@@ -1,7 +1,8 @@
 # swing_desk
 Multi-agent AI financial advisor for US stock analysis built with Streamlit, Agno, Groq, DuckDuckGo, and yfinance
 
-# Swing Desk — US Equity Analyst [Disclaimer: Just for learning purpose and not for real trade]
+# Swing Desk — US Equity Analyst 
+## [Disclaimer: Just for learning purpose and not for real trade]
 
 A small Streamlit app that helps get a quick second opinion before a swing trade on US-listed stocks (NYSE/NASDAQ). Give it two tickers, it pulls live price data and runs a couple of AI agents to research and compare them.
 
