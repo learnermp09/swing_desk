@@ -48,11 +48,12 @@ st.info(
     "This application is designed exclusively for learning AI-assisted "
     "US stock swing-trading analysis. It is **not** intended for live trading, "
     "investment recommendations, or financial advice. Always conduct your own "
-    "research before making investment decisions."
+    "research before making investment decisions.\n\n"
+    "Developed **@DecodixAI** by *Mrityunjay Pathak*"
 )
 
 # ---------------------------------------------------------------------------
-# Styling — light gray theme with logo in header
+# Styling
 # ---------------------------------------------------------------------------
 CUSTOM_CSS = """
 <style>
@@ -484,31 +485,8 @@ with st.sidebar:
 # Header with DecodixAI Logo (upper right corner)
 # ---------------------------------------------------------------------------
 
-# SVG logo - DecodixAI logo text with decorative elements
-# You can replace this SVG with your actual logo image if you have one
-logo_svg = """
-<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" style="stop-color:#E6A817;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#BF8A12;stop-opacity:1" />
-        </linearGradient>
-    </defs>
-    <text x="0" y="28" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="28" fill="url(#logoGrad)">DecodixAI</text>
-    <text x="0" y="48" font-family="'JetBrains Mono', monospace" font-size="11" fill="#6B6B6B" letter-spacing="2">
-        DECONSTRUCT. UNDERSTAND. BUILD THE FUTURE.
-    </text>
-</svg>
-"""
-
-# You can also use an image file instead of SVG by uncommenting this:
-# logo_path = "path/to/your/logo.png"  # Replace with your actual logo path
-# if os.path.exists(logo_path):
-#     logo_html = f'<img src="data:image/png;base64,{base64.b64encode(open(logo_path, "rb").read()).decode()}" alt="DecodixAI Logo">'
-# else:
-#     logo_html = logo_svg
-
-logo_html = logo_svg
+logo_url = "https://raw.githubusercontent.com/learnermp09/swing_desk/main/decodixAI.png"
+logo_html = f'<img src="{logo_url}" alt="DecodixAI Logo" style="max-height: 70px; width: auto; display: block;">'
 
 st.markdown(
     f"""
@@ -525,7 +503,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 # ---------------------------------------------------------------------------
 # Header + live ticker
 # ---------------------------------------------------------------------------
@@ -546,7 +523,7 @@ Designed for learning market analysis—not for executing real trades.
 )
 
 # ---------------------------------------------------------------------------
-# Quick quote cards (fast, direct — independent of the LLM call below)
+# Quick quote cards (fast, independent of the LLM call below)
 # ---------------------------------------------------------------------------
 qc1, qc2 = st.columns(2)
 with qc1:
