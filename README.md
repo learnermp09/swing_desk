@@ -73,7 +73,8 @@ Everything lives in one file (`financial_advisor_app.py`) on purpose — it's sm
    ```
 
 ## Frontend interface
-<img width="1752" height="818" alt="image" src="https://github.com/user-attachments/assets/ffd1eacb-ad08-4c67-9c4e-6203ce7e82f9" />
+<img width="1720" height="798" alt="image" src="https://github.com/user-attachments/assets/5cfe69e4-a37f-4b04-8641-2ddbf3624477" />
+
 
 
 ## A few honest limitations
